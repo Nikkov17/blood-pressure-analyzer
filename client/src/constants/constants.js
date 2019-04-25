@@ -1,3 +1,3 @@
-const URL = 'http://localhost:3001';
+const calculatePressureURL = 'http://localhost:3001/calculate';
 
-export default {URL};
+export default {calculatePressureURL};

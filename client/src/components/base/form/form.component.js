@@ -1,21 +1,23 @@
 import React from 'react';
 import './form.css';
 import constants from '../../../constants/constants';
-import Input from '../../base/input/input.component';
 
 class Form extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {};
+	}
+
 	formSubmit(e) {
-		debugger;
 		e.preventDefault();
-		fetch(constants.URL, {
-			method: 'GET', 
-			headers: {
-				"Content-Type": "text/json",
-				"Access-Control-Allow-Origin": "*",
-				"Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-				"Access-Control-Allow-Headers": "Content-Type"
-			}
-		});
+
+		fetch(constants.calculatePressureURL,{
+			method: 'POST',
+			body: JSON.stringify({a: 1, b: 'Textual content'})
+		})
+			.then(function(resp) {
+				debugger;
+			});
 	}
 
 	render() {
@@ -23,8 +25,8 @@ class Form extends React.Component {
 			<div className="form-container">
 				<p className="form-title">Please, enter some info about you:</p>
 				<form className="form" onSubmit={this.formSubmit}>
-					<Input>Your age</Input>
-					<Input>Your blood pressure</Input>
+					<input className="input" id="age-input" placeholder="Your age" type="text" />
+					<input className="input" id="pressure-input" placeholder="Your blood pressure" type="text" />
 					<button className="submit-button" type="submit">Submit</button>
 				</form>
 			</div>
