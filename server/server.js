@@ -1,11 +1,13 @@
-let express = require('express');
-let mongoose = require('mongoose');
-let session = require('express-session');
-let passport = require('passport');
-let bodyParser = require('body-parser');
-let LocalStrategy = require('passport-local').Strategy;
-let usersModel = require('./src/models/usersModel');
-let FacebookStrategy = require('passport-facebook').Strategy;
+const express = require('express');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const passport = require('passport');
+const bodyParser = require('body-parser');
+const LocalStrategy = require('passport-local').Strategy;
+const usersModel = require('./src/models/usersModel');
+const FacebookStrategy = require('passport-facebook').Strategy;
+const cors = require('cors');
+const apiRouter = require('./routes/apirouter');
 
 const app = express();
 
@@ -13,10 +15,10 @@ const app = express();
 mongoose.connect('mongodb://localhost/frontcamp', { useNewUrlParser: true });
 
 //bodyParser
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
+app.use(bodyParser.json());
 
 //session
 app.use(session({
@@ -43,9 +45,15 @@ function(accessToken, refreshToken, profile, cb) {
 }
 ));
 
-//routing
-app.post('/calculate', (req, res) => {
-	res.send(req.body);
+//cors
+app.use(cors())
+app.all('/', function(req, res, next) {
+	res.header('Access-Control-Allow-Headers: Content-Type');
+	res.header('Access-Control-Allow-Methods: POST');
+	next();
 });
+
+//routing
+app.use('/calculate', apiRouter);
 
 app.listen(3001);
