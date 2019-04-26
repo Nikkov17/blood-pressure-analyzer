@@ -36,7 +36,7 @@ class Form extends React.Component {
 				<p className="form-title">Please, enter some info about you:</p>
 				<form className="form" onSubmit={this.formSubmit}>
 					<input className="input" id="age-input" placeholder="Your age" type="text" />
-					<select className="input" defaultValue={''} required>
+					<select className="input select" defaultValue={''} required>
 						<option value="" disabled>select gender</option>
 						<option value="male">male</option>
 						<option value="female">female</option>

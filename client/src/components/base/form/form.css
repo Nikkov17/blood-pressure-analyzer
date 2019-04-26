@@ -50,6 +50,10 @@
 	}
 }
 
+.select {
+	height: 37px;
+}
+
 .submit-button {
 	margin-top: 20px;
 	width: 60%;
