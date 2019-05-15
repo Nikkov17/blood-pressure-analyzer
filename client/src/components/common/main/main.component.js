@@ -6,6 +6,7 @@ import { createStore } from 'redux'
 import { createBrowserHistory } from 'history';
 import './main.css';
 import Form from '../../base/form/form.component';
+import SignIn from '../../base/signin/signin.component';
 
 const store = createStore(() => {return {}},{});
 const history = createBrowserHistory();
@@ -17,7 +18,7 @@ class Main extends React.Component {
 				<Router history={history}>
 					<Switch>
 						<Route exact={true} path='/' component={Form} />
-						{/* <Route path='/signin' component={LoginForm} /> */}
+						<Route path='/signin' component={SignIn} />
 						{/* <Route path='/signup' component={RegisterForm} /> */}
 						{/* <Route path='/userInfo' component={UserInformation}/> */}
 					</Switch>

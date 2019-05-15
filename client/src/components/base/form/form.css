@@ -55,6 +55,7 @@
 }
 
 .submit-button {
+	cursor: pointer;
 	margin-top: 20px;
 	width: 60%;
 	height: 35px;
@@ -70,4 +71,27 @@
 	.submit-button {
 		width: 80%;
 	}
+}
+.submit-button:hover {
+	background-color: #5a67c9;
+}
+
+.account-links {
+	border-top: 1px solid white;
+	margin-top: 15px;
+	width: 60%;
+	color: #FFFAFA;
+	text-decoration: none;
+	flex-direction: row;
+	display: flex;
+	justify-content: space-between;
+}
+
+.inactive {
+	cursor: pointer;
+	color: #fff;
+	text-decoration: none;
+}
+.inactive:hover {
+	color:rgb(125, 140, 199);
 }
