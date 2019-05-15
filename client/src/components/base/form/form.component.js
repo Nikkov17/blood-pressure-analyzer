@@ -10,6 +10,7 @@ class Form extends React.Component {
 			pressureValue: null
 		};
 		this.formSubmit = this.formSubmit.bind(this);
+		this.logout = this.logout.bind(this);
 	}
 
 	formSubmit(e) {
@@ -20,8 +21,6 @@ class Form extends React.Component {
 		let data = {
 			age: form[0].value,
 			gender: form[1].value
-			// systolicBloodPressure: form[2].value,
-			// diastolicBloodPressure: form[3].value
 		};
 
 		fetch(constants.calculatePressureURL,{
@@ -39,9 +38,33 @@ class Form extends React.Component {
 			})
 	}
 
+	logout() {
+		let that = this;
+
+		fetch(constants.logout,{
+			method: 'GET',
+			headers:{'content-type': 'application/json'},
+		})
+			.then(function() {
+				that.props.updateToken();
+			})
+	}
+
 	render() {
 		let result;
+		let links;
 
+		if(!this.props.getToken()) {
+			links = <div className="account-links">
+				<NavLink className="inactive" to="/signin"> Sign in </NavLink>
+				<NavLink className="inactive" to="/signup"> Sign up </NavLink>
+			</div>
+		} else {
+			links = <div className="account-links">
+				<NavLink className="inactive" to="/personalcab"> personal cabinet </NavLink>
+				<a className="inactive" onClick={this.logout}> log out </a>
+			</div>
+		}
 		if(this.state.pressureValue) {
 			result = <h2>Normal value: {this.state.pressureValue}</h2>
 		}
@@ -61,10 +84,7 @@ class Form extends React.Component {
 					<button className="submit-button" type="submit">Submit</button>
 				</form>
 				{result}
-				<div className="account-links">
-					<NavLink className="inactive" to="/signin"> Sign in </NavLink>
-					<NavLink className="inactive" to="/dashboard"> Sign up </NavLink>
-				</div>
+				{links}
 			</div>
 			</React.Fragment>
 		);

@@ -54,6 +54,6 @@ app.all('/', function(req, res, next) {
 });
 
 //routing
-app.use('/calculate', apiRouter);
+app.use('/', apiRouter);
 
 app.listen(3001);

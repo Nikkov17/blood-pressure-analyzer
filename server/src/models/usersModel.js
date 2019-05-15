@@ -13,9 +13,6 @@ let UserSchema = new mongoose.Schema({
 	},
 	password2: {
 		type: String,
-	},
-	email: {
-		type: String,
 	}
 });
 
