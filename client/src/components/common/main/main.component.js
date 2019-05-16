@@ -43,7 +43,7 @@ class Main extends React.Component {
 						<Route exact={true} path='/' render={() => <Form updateToken={this.updateToken} getToken={this.getToken} />} />
 						<Route path='/signin' render={() => <SignIn updateToken={this.updateToken} getToken={this.getToken} />} />
 						<Route path='/signup' render={() => <SignUp updateToken={this.updateToken} getToken={this.getToken} />} />
-						<Route path='/personalcab' render={() => <Personalcab updateToken={this.updateToken} />} />
+						<Route path='/personalcab' render={() => <Personalcab updateToken={this.updateToken} getToken={this.getToken} />} />
 					</Switch>
 				</Router>
 			</Provider>

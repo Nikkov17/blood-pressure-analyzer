@@ -79,8 +79,6 @@ class Form extends React.Component {
 						<option value="male">male</option>
 						<option value="female">female</option>
 					</select>
-					{/* <input className="input" id="pressure-input" placeholder="Your systolic blood pressure" type="text" /> */}
-					{/* <input className="input" id="pressure-input" placeholder="Your diastolic blood pressure" type="text" /> */}
 					<button className="submit-button" type="submit">Submit</button>
 				</form>
 				{result}
