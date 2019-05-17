@@ -8,7 +8,7 @@ const usersModel = require('./src/models/usersModel');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const cors = require('cors');
 const apiRouter = require('./routes/apirouter');
-const apiController = require('../src/controllers/apicontroller');
+// const apiController = require('../src/controllers/apicontroller');
 
 const app = express();
 

@@ -166,14 +166,16 @@ class Form extends React.Component {
 	}
 
 	render() {
+		let reasons;
 		let items;
 		let data;
 		let rejectionReasons;
 
 		if (this.state.history) {
+			reasons = this.state.history[this.state.history.length-1].rejectionReasons;
 			data = this.prepareDataForSchedule();
 			items = this.state.history.map(item => <li>{item.value} (Normal value:{item.normalValue})</li>);
-			rejectionReasons = <div>{this.state.history[this.state.history.length-1]}</div>
+			rejectionReasons = <ul>{reasons.map(item => <li>{item}</li>)}</ul>
 		}
 
 		return (
@@ -184,6 +186,7 @@ class Form extends React.Component {
 						{items}
 					</ol>
 					<Line data={data} />;
+					Some recomendations according to you characteristics:
 					{rejectionReasons}
 				</div>
 				<form className="form" onSubmit={this.formSubmit}>
