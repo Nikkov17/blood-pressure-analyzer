@@ -1,5 +1,6 @@
 import React from 'react';
 import {Line} from 'react-chartjs-2';
+import { NavLink } from 'react-router-dom'
 import constants from '../../../constants/constants';
 
 class Form extends React.Component {
@@ -188,6 +189,9 @@ class Form extends React.Component {
 					<input className="input" id="pressure-input" placeholder="Your diastolic blood pressure" type="text" />
 					<button className="submit-button" type="submit">Submit</button>
 				</form>
+				<div className="account-links">
+					<NavLink className="inactive" to="/"> Home </NavLink>
+				</div>
 			</div>
 		);
 	}

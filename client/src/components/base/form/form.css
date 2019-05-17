@@ -95,3 +95,22 @@
 .inactive:hover {
 	color:rgb(125, 140, 199);
 }
+
+.section {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.text {
+	color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-family: 'Raleway', sans-serif;
+	width: 80%;
+	margin-bottom: 20px;
+}
