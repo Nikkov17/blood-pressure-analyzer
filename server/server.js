@@ -8,6 +8,7 @@ const usersModel = require('./src/models/usersModel');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const cors = require('cors');
 const apiRouter = require('./routes/apirouter');
+const apiController = require('../src/controllers/apicontroller');
 
 const app = express();
 
@@ -55,5 +56,13 @@ app.all('/', function(req, res, next) {
 
 //routing
 app.use('/', apiRouter);
+
+// setInterval(function () {
+// 	var date = new Date();
+// 	if (date.getHours() === 7 && date.getMinutes === 0) {
+// 		apiController.sendNotifications()
+// 	};
+// }, 3600000)
+
 
 app.listen(3001);

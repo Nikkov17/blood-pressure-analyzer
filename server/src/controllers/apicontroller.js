@@ -1,4 +1,6 @@
 const bpMocks = require('../mocks/bponageandgendermocks');
+const usersModel = require('../src/models/usersModel');
+const nodemailer = require("nodemailer");
 
 module.exports = {
 	getNormalPressure: (req, res) => {
@@ -67,5 +69,47 @@ module.exports = {
 		}
 
 		return reasonsArray;
+	},
+
+	sendNotifications() {
+		usersModel.find((error, users) => {
+			users.forEach(user => {
+				if(user.username.match( /@/ig ) && user.city) {
+					let testAccount = await nodemailer.createTestAccount();
+
+					let xhr = new XMLHttpRequest();
+					xhr.open('GET', 'http://api.apixu.com/v1/current.json?key=d9fe708ea76e4ad6977111820191705&q=' + user.city);
+					xhr.onreadystatechange = (resp) => {
+						let pressureValue = resp.condition.pressure_mb / 133.466;
+						let text;
+
+						if (pressureValue > 770 || pressureValue < 740) {
+							text = 'Be careful, there is increased pressure, with high atmospheric pressure, weather-sensitive people should behave more passively, avoid physical exertion, measure blood pressure more often and consult a doctor if necessary. Additional medications should not be taken, however, with an increase in blood pressure, you can resort to short-acting drugs.';
+						} else if (pressureValue < 740) {
+							text = 'Be careful, there is a reduced atmospheric pressure, with low atmospheric pressure, weather-sensitive people should behave more passively, avoid physical exertion, measure blood pressure more often and, if necessary, consult a doctor. Additional medications should not be taken, however, with an increase in blood pressure, you can resort to short-acting drugs.';
+						}
+
+						if (text) {
+							let transporter = nodemailer.createTransport({
+								host: "smtp.ethereal.email",
+								port: 587,
+								secure: false,
+								auth: {
+									user: testAccount.user,
+									pass: testAccount.pass
+								}
+							});
+							await transporter.sendMail({
+								from: 'mimohojij@mail-finder.net',
+								to: user.username,
+								subject: "weather",
+								text: text,
+							});
+						}
+					};
+					xhr.send(JSON.stringify(data));
+				}
+			});
+		});
 	}
 }

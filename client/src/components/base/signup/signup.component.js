@@ -16,7 +16,8 @@ class SignIn extends React.Component {
 		if (form[1].value === form[2].value) {
 			let data = {
 				username: form[0].value,
-				password: form[1].value
+				password: form[1].value,
+				city: form[2].value,
 			};
 	
 			fetch(constants.register,{
@@ -39,11 +40,14 @@ class SignIn extends React.Component {
 	render() {
 		return (
 			<div className="form-container">
-				<p className="form-title">Please, sign in:</p>
+				<p className="form-title">Please, register:</p>
+				<p className="form-title">if you want to get email notifications about possible atmospheric pressure on blood pressure, please as username point your email </p>
 				<form className="form" onSubmit={this.formSubmit}>
 					<input className="input" id="email-input" placeholder="enter your email" type="text" />
 					<input className="input" id="password-input" placeholder="enter your password" type="password" />
 					<input className="input" id="password-input" placeholder="repeat your password" type="password" />
+					<p className="form-title">Please, enter next field if you want to get email notifications</p>
+					<input className="input" placeholder="enter your city" type="text" />
 					<button className="submit-button" type="submit">Submit</button>
 				</form>
 				<div className="account-links">

@@ -10,18 +10,13 @@ const apiRouter = new express.Router();
 apiRouter.post('/calculate', apiController.getNormalPressure);
 
 apiRouter.post('/register', (req, res) => {
-	usersModel.register(new usersModel({ username: req.body.username }), req.body.password, function(err, user){
+	usersModel.register(new usersModel({ 
+		username: req.body.username,
+		city: req.body.city
+	}), req.body.password, function(err, user){
 		if (err) {
 			return res.render('error', { message: err });
 		}
-
-		passport.authenticate('local')(req, res, function(){
-			let date = new Date();
-
-			res.send({
-				token: date.getTime()
-			});
-		})
 	})
 });
 

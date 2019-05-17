@@ -13,6 +13,9 @@ let UserSchema = new mongoose.Schema({
 	},
 	password2: {
 		type: String,
+	},
+	city: {
+		type: String,
 	}
 });
 
