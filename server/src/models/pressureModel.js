@@ -15,7 +15,22 @@ let pressureSchema = new mongoose.Schema({
     },
     date: {
         type: Number
-    }
+	},
+	height: {
+		type: Number
+	},
+	weight: {
+		type: Number
+	},
+	physicalActivity: {
+		type: String
+	},
+	alcohol: {
+		type: String
+	},
+	smoke: {
+		type: Boolean
+	}
 });
 
 module.exports = mongoose.model('pressure', pressureSchema); 

@@ -43,7 +43,12 @@ class Form extends React.Component {
 			age: form[0].value,
 			gender: form[1].value,
 			value: value,
-			date: +new Date()
+			date: +new Date(),
+			height: form[4].value,
+			weight: form[5].value,
+			physicalActivity: form[6].value,
+			alcohol: form[7].value,
+			smoke: form[8].value
 		};
 
 		let xhr = new XMLHttpRequest();
@@ -163,10 +168,12 @@ class Form extends React.Component {
 	render() {
 		let items;
 		let data;
+		let rejectionReasons;
 
 		if (this.state.history) {
 			data = this.prepareDataForSchedule();
 			items = this.state.history.map(item => <li>{item.value} (Normal value:{item.normalValue})</li>);
+			rejectionReasons = <div>{this.state.history[this.state.history.length-1]}</div>
 		}
 
 		return (
@@ -177,6 +184,7 @@ class Form extends React.Component {
 						{items}
 					</ol>
 					<Line data={data} />;
+					{rejectionReasons}
 				</div>
 				<form className="form" onSubmit={this.formSubmit}>
 					<input className="input" id="age-input" placeholder="Your age" type="text" />
@@ -187,6 +195,25 @@ class Form extends React.Component {
 					</select>
 					<input className="input" id="pressure-input" placeholder="Your systolic blood pressure" type="text" />
 					<input className="input" id="pressure-input" placeholder="Your diastolic blood pressure" type="text" />
+					<input className="input" id="pressure-input" placeholder="Your height" type="number" />
+					<input className="input" id="pressure-input" placeholder="Your weight" type="number" />
+					<select className="input select" defaultValue={''} required>
+						<option value="" disabled>select your physical activity</option>
+						<option value="active">active/sportsmen</option>
+						<option value="normal">several times a week for an hour</option>
+						<option value="notactive">less often</option>
+					</select>
+					<select className="input select" defaultValue={''} required>
+						<option value="" disabled>alcohol consumption</option>
+						<option value="normal">1-2 drinks per day</option>
+						<option value="active">more often</option>
+						<option value="notactive">less often</option>
+					</select>
+					<select className="input select" defaultValue={''} required>
+						<option value="" disabled>do you smoke</option>
+						<option value="true">yes</option>
+						<option value="false">no</option>
+					</select>
 					<button className="submit-button" type="submit">Submit</button>
 				</form>
 				<div className="account-links">

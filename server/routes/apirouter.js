@@ -45,7 +45,12 @@ apiRouter.put('/addvalue', function(req, res, next) {
 		value: req.body.value,
 		age: req.body.age,
 		gender: req.body.gender,
-		date: req.body.date
+		date: req.body.date,
+		height: req.body.height,
+		weight: req.body.weight,
+		physicalActivity: req.body.physicalActivity,
+		alcohol: req.body.alcohol,
+		smoke: req.body.smoke
 	});
 
 	data.save();
@@ -58,26 +63,35 @@ apiRouter.get('/gethistory/:token', function(req, res, next) {
 
 	pressureModel.find({'token': token}, (error, items) => {
 		if (items) {
-			let i = 0;
 			let array = [];
 
 			items.forEach(function(item) {
 				let bpOnGender = bpMocks[item.gender];
 				let normalValue;
+				let obj;
 		
 				for (key in bpOnGender) {
 					if (item.age > key) {
 						normalValue = bpOnGender[key];
 					}
 				}
-				array.push({
+
+				obj = {
 					token: item.token,
 					value: item.value,
 					age: item.age,
 					gender: item.gender,
 					date: item.date,
-					normalValue: normalValue
-				});
+					height: item.height,
+					weight: item.weight,
+					physicalActivity: item.physicalActivity,
+					alcohol: item.alcohol,
+					smoke: item.smoke,
+					normalValue: normalValue,
+				};
+				obj.rejectionReasons = apiController.analyzeRejectionReasons(obj);
+
+				array.push(obj);
 			});
 
 			res.send(array);
