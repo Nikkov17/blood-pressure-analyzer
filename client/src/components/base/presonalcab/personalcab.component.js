@@ -185,6 +185,9 @@ class Form extends React.Component {
 					<ol>
 						{items}
 					</ol>
+					<p>
+						If you have chronically elevated or low blood pressure, you should consult a doctor.
+					</p>
 					<Line data={data} />;
 					Some recomendations according to you characteristics:
 					{rejectionReasons}

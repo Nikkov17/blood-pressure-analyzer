@@ -37,14 +37,19 @@ module.exports = {
 	// normalValue
 	analyzeRejectionReasons: (obj) => {
 		let reasonsArray = [];
+		let systolicPressureValue = obj.value.split('/')[0];
+		let dyastolicPressureValue = obj.value.split('/')[1];
+		let systolicNormalPressureValue = obj.normalValue.split('/')[0];
+		let dyastolicNormalPressureValue = obj.normalValue.split('/')[1];
+
 		if (obj.height && obj.weight) {
 			let weight = obj.weight / (obj.height / 100 * obj.height / 100);
 			if (weight < 18.5) {
-				reasonsArray.push('Underweight');
+				reasonsArray.push('Recommend to gain weight');
 			} else if (weight > 25 && weight < 30) {
-				reasonsArray.push('Overweight');
+				reasonsArray.push('Recommend to lose weight');
 			} else if (weight > 30) {
-				reasonsArray.push('Extremely overweight');
+				reasonsArray.push('Extremely recommend to lose weight');
 			}
 		}
 
@@ -65,6 +70,22 @@ module.exports = {
 		if (obj.smoke) {
 			if (obj.smoke === true) {
 				reasonsArray.push('Smoking can cause pressure deterioration');
+			}
+		}
+
+		if (obj.value) {
+			if (obj.value === true) {
+				reasonsArray.push('Smoking can cause pressure deterioration');
+			}
+		}
+
+		if (systolicPressureValue && systolicNormalPressureValue && dyastolicPressureValue && dyastolicNormalPressureValue) {
+			if (
+				(systolicNormalPressureValue - systolicPressureValue) > 20 &&
+				(dyastolicNormalPressureValue - dyastolicPressureValue) > 20
+			) {
+				reasonsArray.push('Try to avoid stress conditions');
+				reasonsArray.push('Try to avoid taking various stimulating substances');
 			}
 		}
 
