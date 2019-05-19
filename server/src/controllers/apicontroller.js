@@ -84,6 +84,12 @@ module.exports = {
 		}
 
 		if (systolicPressureValue && dyastolicPressureValue) {
+			if (systolicPressureValue > 140) {
+				reasonsArray.push('There is a risk of cardiovascular disease.');
+			}
+		}
+
+		if (systolicPressureValue && dyastolicPressureValue) {
 			if ((systolicPressureValue - dyastolicPressureValue) > 55) {
 				reasonsArray.push('You have a significant difference between the upper and lower pressure, which may indicate a malfunction of the digestive system, lesions of the gallbladder, ducts, and tuberculosis.');
 			} else if ((systolicPressureValue - dyastolicPressureValue) < 30) {
