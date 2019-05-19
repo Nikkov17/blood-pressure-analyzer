@@ -73,12 +73,6 @@ module.exports = {
 			}
 		}
 
-		if (obj.value) {
-			if (obj.value === true) {
-				reasonsArray.push('Smoking can cause pressure deterioration');
-			}
-		}
-
 		if (systolicPressureValue && systolicNormalPressureValue && dyastolicPressureValue && dyastolicNormalPressureValue) {
 			if (
 				(systolicNormalPressureValue - systolicPressureValue) > 20 &&
