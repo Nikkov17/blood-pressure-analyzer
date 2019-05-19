@@ -89,6 +89,15 @@ module.exports = {
 			}
 		}
 
+		if (systolicPressureValue && dyastolicPressureValue) {
+			if ((systolicPressureValue - dyastolicPressureValue) > 55) {
+				reasonsArray.push('You have a significant difference between the upper and lower pressure, which may indicate a malfunction of the digestive system, lesions of the gallbladder, ducts, and tuberculosis.');
+			} else if ((systolicPressureValue - dyastolicPressureValue) < 30) {
+				reasonsArray.push('You have a lower difference in upper and lower pressure, which can lead to hypoxia, atrophic changes in the brain, impaired vision, respiratory paralysis, cardiac arrest. Seek medical attention immediately.');
+			}
+		}
+
+
 		return reasonsArray;
 	},
 
