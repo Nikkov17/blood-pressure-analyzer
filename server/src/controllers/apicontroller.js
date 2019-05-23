@@ -42,54 +42,52 @@ module.exports = {
 		let systolicNormalPressureValue = obj.normalValue.split('/')[0];
 		let dyastolicNormalPressureValue = obj.normalValue.split('/')[1];
 
-		if (obj.height && obj.weight) {
-			let weight = obj.weight / (obj.height / 100 * obj.height / 100);
-			if (weight < 18.5) {
-				reasonsArray.push('Recommend to gain weight');
-			} else if (weight > 25 && weight < 30) {
-				reasonsArray.push('Recommend to lose weight');
-			} else if (weight > 30) {
-				reasonsArray.push('Extremely recommend to lose weight');
-			}
-		}
-
-		if (obj.physicalActivity) {
-			if (obj.physicalActivity === 'notactive') {
-				reasonsArray.push('Try to increase your physical activity');
-			}
-		}
-
-		if (obj.alcohol) {
-			if (obj.alcohol === 'normal') {
-				reasonsArray.push('Reduction in the amount of alcohol consumed can contribute to better health');
-			} else if (obj.alcohol === 'active') {
-				reasonsArray.push('You need to reduce the amount of alcohol consumed.');
-			}
-		}
-
-		if (obj.smoke) {
-			if (obj.smoke === true) {
-				reasonsArray.push('Smoking can cause pressure deterioration');
-			}
-		}
-
-		if (systolicPressureValue && systolicNormalPressureValue && dyastolicPressureValue && dyastolicNormalPressureValue) {
-			if (
-				(systolicNormalPressureValue - systolicPressureValue) > 20 &&
-				(dyastolicNormalPressureValue - dyastolicPressureValue) > 20
-			) {
-				reasonsArray.push('Try to avoid stress conditions');
-				reasonsArray.push('Try to avoid taking various stimulating substances');
-			}
-		}
-
 		if (systolicPressureValue && dyastolicPressureValue) {
+			if (obj.height && obj.weight) {
+				let weight = obj.weight / (obj.height / 100 * obj.height / 100);
+				if (weight < 18.5) {
+					reasonsArray.push('Recommend to gain weight');
+				} else if (weight > 25 && weight < 30) {
+					reasonsArray.push('Recommend to lose weight');
+				} else if (weight > 30) {
+					reasonsArray.push('Extremely recommend to lose weight');
+				}
+			}
+
+			if (obj.physicalActivity) {
+				if (obj.physicalActivity === 'notactive') {
+					reasonsArray.push('Try to increase your physical activity');
+				}
+			}
+
+			if (obj.alcohol) {
+				if (obj.alcohol === 'normal') {
+					reasonsArray.push('Reduction in the amount of alcohol consumed can contribute to better health');
+				} else if (obj.alcohol === 'active') {
+					reasonsArray.push('You need to reduce the amount of alcohol consumed.');
+				}
+			}
+
+			if (obj.smoke) {
+				if (obj.smoke === true) {
+					reasonsArray.push('Smoking can cause pressure deterioration');
+				}
+			}
+
+			if (systolicNormalPressureValue && dyastolicNormalPressureValue) {
+				if (
+					(systolicNormalPressureValue - systolicPressureValue) > 20 &&
+					(dyastolicNormalPressureValue - dyastolicPressureValue) > 20
+				) {
+					reasonsArray.push('Try to avoid stress conditions');
+					reasonsArray.push('Try to avoid taking various stimulating substances');
+				}
+			}
+
 			if (systolicPressureValue > 140) {
 				reasonsArray.push('There is a risk of cardiovascular disease.');
 			}
-		}
 
-		if (systolicPressureValue && dyastolicPressureValue) {
 			if ((systolicPressureValue - dyastolicPressureValue) > 55) {
 				reasonsArray.push('You have a significant difference between the upper and lower pressure, which may indicate a malfunction of the digestive system, lesions of the gallbladder, ducts, and tuberculosis.');
 			} else if ((systolicPressureValue - dyastolicPressureValue) < 30) {
