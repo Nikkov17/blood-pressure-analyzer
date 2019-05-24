@@ -15,7 +15,7 @@ apiRouter.post('/register', (req, res) => {
 		city: req.body.city
 	}), req.body.password, function(err, user){
 		if (err) {
-			return res.render('error', { message: err });
+			return res.send({ message: err });
 		}
 	})
 });

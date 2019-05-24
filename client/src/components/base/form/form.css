@@ -114,3 +114,8 @@
 	width: 80%;
 	margin-bottom: 20px;
 }
+
+.error {
+	color: #ff5151;
+	font-weight: bolder;
+}

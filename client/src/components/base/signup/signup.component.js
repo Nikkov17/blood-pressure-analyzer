@@ -29,8 +29,12 @@ class SignIn extends React.Component {
 					return resp.json();
 				})
 				.then((resp) => {
-					that.props.updateToken(resp.token);
-					that.props.history.push('/personalcab');
+					if (resp.token) {
+						that.props.updateToken(resp.token);
+						that.props.history.push('/personalcab');
+					} else {
+						this.setState({error: resp.message.message});
+					}
 				});
 		} else {
 			this.setState({error: 'entered passwords are different'});
@@ -53,7 +57,7 @@ class SignIn extends React.Component {
 				<div className="account-links">
 					<NavLink className="inactive" to="/"> Home </NavLink>
 				</div>
-				<p>{this.state.error}</p>
+				<p className="error">{this.state.error}</p>
 			</div>
 		);
 	}
