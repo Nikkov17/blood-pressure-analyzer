@@ -171,7 +171,7 @@ class Form extends React.Component {
 		let data;
 		let rejectionReasons;
 
-		if (this.state.history) {
+		if (this.state.history && this.state.history[this.state.history.length-1]) {
 			reasons = this.state.history[this.state.history.length-1].rejectionReasons;
 			data = this.prepareDataForSchedule();
 			items = this.state.history.map(item => <li>{item.value} (Normal value:{item.normalValue})</li>);
